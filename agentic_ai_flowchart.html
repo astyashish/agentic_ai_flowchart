@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agentic AI Insurance System Flowchart</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .flowchart {
+            padding: 40px;
+            position: relative;
+            overflow-x: auto;
+        }
+        
+        .flow-section {
+            margin-bottom: 50px;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        .flow-section:nth-child(1) { animation-delay: 0.1s; }
+        .flow-section:nth-child(2) { animation-delay: 0.2s; }
+        .flow-section:nth-child(3) { animation-delay: 0.3s; }
+        .flow-section:nth-child(4) { animation-delay: 0.4s; }
+        .flow-section:nth-child(5) { animation-delay: 0.5s; }
+        
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #3498db, #2980b9);
+        }
+        
+        .flow-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .flow-box {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-left: 5px solid #3498db;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            min-width: 200px;
+            max-width: 300px;
+            position: relative;
+        }
+        
+        .flow-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .flow-box.input { border-left-color: #e74c3c; }
+        .flow-box.process { border-left-color: #f39c12; }
+        .flow-box.ai { border-left-color: #9b59b6; }
+        .flow-box.storage { border-left-color: #27ae60; }
+        .flow-box.output { border-left-color: #34495e; }
+        
+        .flow-box h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .flow-box p {
+            font-size: 0.95rem;
+            line-height: 1.4;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        
+        .flow-box .tech-stack {
+            background: #f8f9fa;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: #495057;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+        
+        .arrow {
+            color: #3498db;
+            font-size: 2rem;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+        
+        .arrow.down {
+            transform: rotate(90deg);
+        }
+        
+        .multi-agent-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .agent-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .agent-box:hover {
+            transform: scale(1.05);
+        }
+        
+        .agent-box h4 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .agent-box ul {
+            list-style: none;
+            text-align: left;
+        }
+        
+        .agent-box li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .agent-box li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #2ecc71;
+            font-weight: bold;
+        }
+        
+        .geo-analysis {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin: 30px 0;
+        }
+        
+        .geo-factors {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .geo-factor {
+            background: rgba(255,255,255,0.2);
+            padding: 15px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .api-integrations {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .api-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            min-width: 200px;
+            flex: 1;
+            max-width: 300px;
+        }
+        
+        .api-card h4 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+        
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .data-flow {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 2px dashed #dee2e6;
+        }
+        
+        .data-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .data-point {
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #e9ecef;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .flow-row {
+                flex-direction: column;
+            }
+            
+            .flowchart {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 SBI Life Insurance Agentic AI System</h1>
+            <p>Multi-Agent Architecture with Advanced Geolocation Analysis & Complex Data Processing</p>
+        </div>
+        
+        <div class="flowchart">
+            <!-- Input Layer -->
+            <div class="flow-section">
+                <h2 class="section-title">1. User Input & Data Collection</h2>
+                <div class="flow-row">
+                    <div class="flow-box input">
+                        <h3>📋 User Profile Data</h3>
+                        <p>Personal & Financial Information</p>
+                        <div class="tech-stack">Flask API Endpoint</div>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="flow-box input">
+                        <h3>📍 Location Data</h3>
+                        <p>City, State, Country</p>
+                        <div class="tech-stack">GPS/IP Geolocation</div>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="flow-box input">
+                        <h3>👤 Behavioral Data</h3>
+                        <p>Interaction History, Clicks, Views</p>
+                        <div class="tech-stack">User Analytics</div>
+                    </div>
+                </div>
+                
+                <div class="data-flow">
+                    <h4>📊 Collected Data Points:</h4>
+                    <div class="data-points">
+                        <div class="data-point">Age</div>
+                        <div class="data-point">Income</div>
+                        <div class="data-point">Dependents</div>
+                        <div class="data-point">Occupation</div>
+                        <div class="data-point">Risk Appetite</div>
+                        <div class="data-point">Financial Goals</div>
+                        <div class="data-point">Location</div>
+                        <div class="data-point">Coins Earned</div>
+                        <div class="data-point">Plan Clicks</div>
+                        <div class="data-point">Interaction History</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Geolocation Analysis -->
+            <div class="flow-section">
+                <h2 class="section-title">2. Advanced Geolocation Analysis</h2>
+                <div class="geo-analysis">
+                    <h3>🌍 Complex Geo-Processing Engine</h3>
+                    <p>Utilizes Google Gemini AI to analyze location-specific risk factors and lifestyle patterns</p>
+                    
+                    <div class="geo-factors">
+                        <div class="geo-factor">
+                            <strong>Health Risk Analysis</strong><br>
+                            Regional disease patterns, pollution levels
+                        </div>
+                        <div class="geo-factor">
+                            <strong>Disaster Risk Assessment</strong><br>
+                            Natural disasters, flood zones, earthquakes
+                        </div>
+                        <div class="geo-factor">
+                            <strong>Lifestyle Scoring</strong><br>
+                            Urban vs rural, lifestyle quality index
+                        </div>
+                        <div class="geo-factor">
+                            <strong>Demographics</strong><br>
+                            Population density, birth/death rates
+                        </div>
+                        <div class="geo-factor">
+                            <strong>Accident Risk</strong><br>
+                            Traffic, industrial, regional accident data
+                        </div>
+                        <div class="geo-factor">
+                            <strong>Healthcare Access</strong><br>
+                            Hospital density, medical facility quality
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- API Integration Layer -->
+            <div class="flow-section">
+                <h2 class="section-title">3. Multi-API Integration Layer</h2>
+                <div class="api-integrations">
+                    <div class="api-card">
+                        <h4>🧠 Google Gemini AI</h4>
+                        <p>Advanced geolocation analysis, nudge generation, explanations</p>
+                        <div style="font-size: 0.9rem; margin-top: 10px;">
+                            • Location risk assessment<br>
+                            • Personalized content generation<br>
+                            • Complex reasoning tasks
+                        </div>
+                    </div>
+                    <div class="api-card">
+                        <h4>🤗 HuggingFace</h4>
+                        <p>Text summarization & Q&A processing</p>
+                        <div style="font-size: 0.9rem; margin-top: 10px;">
+                            • BART summarization<br>
+                            • RoBERTa Q&A pipeline<br>
+                            • GPU acceleration
+                        </div>
+                    </div>
+                    <div class="api-card">
+                        <h4>🍃 MongoDB Atlas</h4>
+                        <p>Distributed data storage & retrieval</p>
+                        <div style="font-size: 0.9rem; margin-top: 10px;">
+                            • User profile storage<br>
+                            • Result caching<br>
+                            • Analytics data
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Multi-Agent Processing -->
+            <div class="flow-section">
+                <h2 class="section-title">4. Multi-Agent AI Processing System</h2>
+                <div class="multi-agent-grid">
+                    <div class="agent-box">
+                        <h4>🎯 Recommendation Agent</h4>
+                        <ul>
+                            <li>Random Forest ML Model</li>
+                            <li>13-feature input vector</li>
+                            <li>Geolocation-aware scoring</li>
+                            <li>Plan ranking & probability</li>
+                            <li>Priority-based overrides</li>
+                        </ul>
+                    </div>
+                    <div class="agent-box">
+                        <h4>💬 Nudging Agent</h4>
+                        <ul>
+                            <li>Personalized messaging</li>
+                            <li>Location-specific content</li>
+                            <li>Behavioral psychology</li>
+                            <li>Gemini AI integration</li>
+                            <li>Cultural adaptation</li>
+                        </ul>
+                    </div>
+                    <div class="agent-box">
+                        <h4>📝 Summarization Agent</h4>
+                        <ul>
+                            <li>BART-large-CNN model</li>
+                            <li>Adaptive length control</li>
+                            <li>Context preservation</li>
+                            <li>Multi-language support</li>
+                            <li>GPU optimization</li>
+                        </ul>
+                    </div>
+                    <div class="agent-box">
+                        <h4>❓ Q&A Agent</h4>
+                        <ul>
+                            <li>RoBERTa-base-squad2</li>
+                            <li>Confidence scoring</li>
+                            <li>Context-aware answers</li>
+                            <li>Fallback mechanisms</li>
+                            <li>Real-time processing</li>
+                        </ul>
+                    </div>
+                    <div class="agent-box">
+                        <h4>💾 Storage Agent</h4>
+                        <ul>
+                            <li>Dual storage system</li>
+                            <li>Auto-increment user IDs</li>
+                            <li>Data validation</li>
+                            <li>Backup mechanisms</li>
+                            <li>UTF-8 encoding</li>
+                        </ul>
+                    </div>
+                    <div class="agent-box">
+                        <h4>📊 Analytics Agent</h4>
+                        <ul>
+                            <li>Churn risk calculation</li>
+                            <li>Engagement scoring</li>
+                            <li>Performance metrics</li>
+                            <li>Behavioral analysis</li>
+                            <li>Predictive modeling</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Complex Processing Pipeline -->
+            <div class="flow-section">
+                <h2 class="section-title">5. Complex Data Processing Pipeline</h2>
+                <div class="flow-row">
+                    <div class="flow-box process">
+                        <h3>⚡ Data Validation</h3>
+                        <p>Multi-layer input validation</p>
+                        <p>• Required field checks</p>
+                        <p>• Type conversion & range validation</p>
+                        <p>• Location structure validation</p>
+                        <div class="tech-stack">Python + Flask Validators</div>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="flow-box ai">
+                        <h3>🧮 Feature Engineering</h3>
+                        <p>13-dimensional feature vector</p>
+                        <p>• User demographics</p>
+                        <p>• Geolocation risk factors</p>
+                        <p>• Behavioral patterns</p>
+                        <div class="tech-stack">NumPy + Scikit-learn</div>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="flow-box ai">
+                        <h3>🎲 ML Prediction</h3>
+                        <p>Random Forest ensemble</p>
+                        <p>• Probability distributions</p>
+                        <p>• Plan ranking algorithm</p>
+                        <p>• Risk-based adjustments</p>
+                        <div class="tech-stack">Scikit-learn RF</div>
+                    </div>
+                </div>
+                
+                <div class="arrow down">↓</div>
+                
+                <div class="flow-row">
+                    <div class="flow-box ai">
+                        <h3>🎨 Content Generation</h3>
+                        <p>AI-powered personalization</p>
+                        <p>• Dynamic nudge messages</p>
+                        <p>• Detailed explanations</p>
+                        <p>• Cultural adaptations</p>
+                        <div class="tech-stack">Gemini 1.5 Flash</div>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="flow-box process">
+                        <h3>📈 Risk Analysis</h3>
+                        <p>Multi-factor churn prediction</p>
+                        <p>• Premium-to-income ratio</p>
+                        <p>• Engagement metrics</p>
+                        <p>• Geographic risk factors</p>
+                        <div class="tech-stack">Custom Algorithm</div>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="flow-box storage">
+                        <h3>💾 Data Persistence</h3>
+                        <p>Dual storage strategy</p>
+                        <p>• MongoDB Atlas (primary)</p>
+                        <p>• Local JSON (backup)</p>
+                        <p>• UTF-8 encoding</p>
+                        <div class="tech-stack">PyMongo + JSON</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Output Generation -->
+            <div class="flow-section">
+                <h2 class="section-title">6. Intelligent Output Generation</h2>
+                <div class="flow-row">
+                    <div class="flow-box output">
+                        <h3>🎯 Primary Recommendation</h3>
+                        <p>Best-fit insurance plan</p>
+                        <p>Confidence score & reasoning</p>
+                        <div class="tech-stack">JSON Response</div>
+                    </div>
+                    <div class="flow-box output">
+                        <h3>📊 Ranked Alternatives</h3>
+                        <p>All plans with probability scores</p>
+                        <p>Comparative analysis</p>
+                        <div class="tech-stack">Sorted Array</div>
+                    </div>
+                    <div class="flow-box output">
+                        <h3>💡 Personalized Insights</h3>
+                        <p>Location-aware nudges</p>
+                        <p>Detailed explanations</p>
+                        <div class="tech-stack">AI-Generated Text</div>
+                    </div>
+                </div>
+                
+                <div class="data-flow">
+                    <h4>📤 Final Output Components:</h4>
+                    <div class="data-points">
+                        <div class="data-point">Recommended Plan</div>
+                        <div class="data-point">Ranked Alternatives</div>
+                        <div class="data-point">Churn Risk Score</div>
+                        <div class="data-point">Nudge Message</div>
+                        <div class="data-point">Detailed Explanation</div>
+                        <div class="data-point">Plan Summary</div>
+                        <div class="data-point">Execution Time</div>
+                        <div class="data-point">AI Service Status</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- System Architecture -->
+            <div class="flow-section">
+                <h2 class="section-title">7. Technical Architecture</h2>
+                <div class="api-integrations">
+                    <div class="api-card">
+                        <h4>🚀 Backend Stack</h4>
+                        <div style="text-align: left; font-size: 0.9rem;">
+                            • Flask REST API<br>
+                            • Python 3.8+<br>
+                            • CORS enabled<br>
+                            • UTF-8 encoding<br>
+                            • Error handling
+                        </div>
+                    </div>
+                    <div class="api-card">
+                        <h4>🤖 AI/ML Stack</h4>
+                        <div style="text-align: left; font-size: 0.9rem;">
+                            • PyTorch (GPU support)<br>
+                            • Transformers library<br>
+                            • Scikit-learn<br>
+                            • NumPy arrays<br>
+                            • CUDA acceleration
+                        </div>
+                    </div>
+                    <div class="api-card">
+                        <h4>🗄️ Data Stack</h4>
+                        <div style="text-align: left; font-size: 0.9rem;">
+                            • MongoDB Atlas<br>
+                            • PyMongo driver<br>
+                            • JSON serialization<br>
+                            • BSON ObjectId<br>
+                            • Auto-indexing
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Legend -->
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #e74c3c;"></div>
+                    <span>Input Layer</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #f39c12;"></div>
+                    <span>Processing</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #9b59b6;"></div>
+                    <span>AI/ML</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #27ae60;"></div>
+                    <span>Storage</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #34495e;"></div>
+                    <span>Output</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
