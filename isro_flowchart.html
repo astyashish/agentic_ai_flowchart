@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LunarShade3D Pro - Technical Flowchart</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; }
+        .flowchart { max-width: 1200px; margin: 0 auto; }
+        .phase { border: 2px solid #333; margin: 20px 0; padding: 15px; }
+        .step { border: 1px solid #666; margin: 10px 0; padding: 10px; background: #f9f9f9; }
+        .arrow { text-align: center; font-size: 24px; margin: 10px 0; }
+        .data-sources { display: flex; flex-wrap: wrap; gap: 10px; }
+        .source { border: 1px solid #999; padding: 5px; background: #eee; }
+        .api-list { list-style: none; padding: 0; }
+        .api-list li { border: 1px solid #ccc; margin: 5px 0; padding: 8px; background: #f5f5f5; }
+        .process-flow { display: flex; flex-wrap: wrap; gap: 15px; }
+        .process-box { border: 1px solid #666; padding: 10px; width: 200px; text-align: center; }
+        .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+        .metric { border: 1px solid #999; padding: 10px; background: #f0f0f0; }
+    </style>
+</head>
+<body>
+    <div class="flowchart">
+        <h1>LunarShade3D Pro: Complete Technical Solution</h1>
+        <p><strong>Problem Statement:</strong> Generation of High-resolution Lunar Digital Elevation Model from Lunar Images using Photoclinometry (Shape from Shading)</p>
+        <p><strong>Current Date:</strong> 03:10 PM IST, Saturday, July 05, 2025 | <strong>Deadline:</strong> July 9, 2025</p>
+
+        <div class="phase">
+            <h2>Phase 1: Data Input & API Integration</h2>
+            <div class="step">
+                <h3>Data Sources</h3>
+                <div class="data-sources">
+                    <div class="source">Chandrayaan (TMC, TMC-2, IIRS, OHRC)</div>
+                    <div class="source">NASA LRO (NAC, WAC, M3)</div>
+                    <div class="source">JAXA Selene</div>
+                    <div class="source">User Upload (TIFF, GeoTIFF)</div>
+                </div>
+            </div>
+            <div class="step">
+                <h3>Free APIs & Tools Used</h3>
+                <ul class="api-list">
+                    <li><strong>NASA PDS:</strong> https://pds.nasa.gov/ - Raw LROC images, LOLA elevation (via pds4-tools)</li>
+                    <li><strong>LROC QuickMap:</strong> https://quickmap.lroc.asu.edu - High-res tiles, DEMs, illumination metadata (via unofficial API)</li>
+                    <li><strong>USGS Astrogeology:</strong> https://astrogeology.usgs.gov - Lunar DEMs, mosaics (ISIS3 processing)</li>
+                    <li><strong>SPICE Toolkit:</strong> https://naif.jpl.nasa.gov/naif/ - Ephemeris, incidence/emission angles (spiceypy)</li>
+                    <li><strong>OpenPlanetaryMap:</strong> https://openplanetary.org/data - Map layers (Leaflet/Cesium)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="arrow">↓</div>
+
+        <div class="phase">
+            <h2>Phase 2: Preprocessing Pipeline</h2>
+            <div class="process-flow">
+                <div class="process-box">
+                    <h4>Format Validation</h4>
+                    <p>Verify TIFF, GeoTIFF compatibility</p>
+                </div>
+                <div class="process-box">
+                    <h4>Metadata Extraction</h4>
+                    <p>Extract solar azimuth, elevation, viewing angles (SPICE)</p>
+                </div>
+                <div class="process-box">
+                    <h4>Image Enhancement</h4>
+                    <p>Contrast adjustment, noise reduction, shadow enhancement</p>
+                </div>
+                <div class="process-box">
+                    <h4>Geometric Correction</h4>
+                    <p>Radiometric calibration, distortion correction</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="arrow">↓</div>
+
+        <div class="phase">
+            <h2>Phase 3: Core Photoclinometry Processing</h2>
+            <div class="step">
+                <h3>Traditional Photoclinometry</h3>
+                <div class="process-flow">
+                    <div class="process-box">
+                        <h4>Reflectance Modeling</h4>
+                        <p>Apply Hapke model for surface reflectance</p>
+                    </div>
+                    <div class="process-box">
+                        <h4>Shadow Analysis</h4>
+                        <p>Detect shadow boundaries and gradients</p>
+                    </div>
+                    <div class="process-box">
+                        <h4>Height Integration</h4>
+                        <p>Convert shading to elevation using SPICE geometry</p>
+                    </div>
+                </div>
+            </div>
+            <div class="step">
+                <h3>AI Enhancement Pipeline</h3>
+                <div class="process-flow">
+                    <div class="process-box">
+                        <h4>CNN Training</h4>
+                        <p>Train on LROC/USGS image-DEM pairs</p>
+                    </div>
+                    <div class="process-box">
+                        <h4>Disparity Prediction</h4>
+                        <p>Generate pixel-level disparity maps</p>
+                    </div>
+                    <div class="process-box">
+                        <h4>Sub-pixel Refinement</h4>
+                        <p>Enhance accuracy for craters, ridges</p>
+                    </div>
+                </div>
+            </div>
+            <div class="step">
+                <h3>Agentic Optimization</h3>
+                <p>Blender simulation of lunar conditions, iterative DEM refinement with physics validation</p>
+            </div>
+        </div>
+
+        <div class="arrow">↓</div>
+
+        <div class="phase">
+            <h2>Phase 4: DEM Generation & Validation</h2>
+            <div class="step">
+                <h3>DEM Construction</h3>
+                <div class="process-flow">
+                    <div class="process-box">
+                        <h4>Disparity to Elevation</h4>
+                        <p>Convert disparity to absolute heights</p>
+                    </div>
+                    <div class="process-box">
+                        <h4>Geodetic Referencing</h4>
+                        <p>Align with lunar coordinate system</p>
+                    </div>
+                    <div class="process-box">
+                        <h4>Surface Interpolation</h4>
+                        <p>Fill gaps, smooth terrain</p>
+                    </div>
+                </div>
+            </div>
+            <div class="step">
+                <h3>Validation Against Reference Data</h3>
+                <ul>
+                    <li>Compare with LOLA laser altimetry</li>
+                    <li>Validate against stereo photogrammetry</li>
+                    <li>Statistical analysis (RMSE, height range correlation)</li>
+                    <li>Accuracy target: Sub-5-meter precision</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="arrow">↓</div>
+
+        <div class="phase">
+            <h2>Phase 5: 3D Visualization & User Interface</h2>
+            <div class="step">
+                <h3>3D Visualization Engine (Three.js)</h3>
+                <div class="process-flow">
+                    <div class="process-box">
+                        <h4>Real-time Rendering</h4>
+                        <p>Adaptive LOD, photorealistic texturing</p>
+                    </div>
+                    <div class="process-box">
+                        <h4>Interactive Tools</h4>
+                        <p>Distance, elevation, slope measurements</p>
+                    </div>
+                    <div class="process-box">
+                        <h4>Dynamic Lighting</h4>
+                        <p>Shadow simulation, lunar day-night cycle</p>
+                    </div>
+                </div>
+            </div>
+            <div class="step">
+                <h3>Advanced Features</h3>
+                <ul>
+                    <li><strong>Lunar Time Machine:</strong> Animate terrain evolution over lunar cycles</li>
+                    <li><strong>AR Integration:</strong> Mobile AR explorer with gesture controls</li>
+                    <li><strong>3D Printing Preview:</strong> Blender simulation of printable terrain</li>
+                    <li><strong>Gamification:</strong> Rover navigation, landing site optimization</li>
+                </ul>
+            </div>
+            <div class="step">
+                <h3>User Interface</h3>
+                <ul>
+                    <li>Beginner mode with tutorials</li>
+                    <li>Expert mode with raw data access</li>
+                    <li>Responsive design (desktop, mobile)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="arrow">↓</div>
+
+        <div class="phase">
+            <h2>Phase 6: Output & Integration</h2>
+            <div class="step">
+                <h3>Output Formats</h3>
+                <div class="data-sources">
+                    <div class="source">GeoTIFF DEM</div>
+                    <div class="source">PLY Point Cloud</div>
+                    <div class="source">OBJ 3D Model</div>
+                    <div class="source">PDS4 Compliant</div>
+                </div>
+            </div>
+            <div class="step">
+                <h3>Integration Capabilities</h3>
+                <ul>
+                    <li>QGIS plugin compatibility</li>
+                    <li>API endpoints (RESTful)</li>
+                    <li>Cloud-based processing</li>
+                    <li>Collaboration tools</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="phase">
+            <h2>Technical Implementation Stack</h2>
+            <div class="step">
+                <h3>Backend Technologies</h3>
+                <ul>
+                    <li><strong>Python:</strong> NumPy, OpenCV, scikit-image</li>
+                    <li><strong>Machine Learning:</strong> TensorFlow for CNN</li>
+                    <li><strong>SPICE Integration:</strong> spiceypy</li>
+                    <li><strong>Blender API:</strong> bpy for 3D simulation</li>
+                </ul>
+            </div>
+            <div class="step">
+                <h3>Frontend Technologies</h3>
+                <ul>
+                    <li><strong>Three.js:</strong> 3D rendering</li>
+                    <li><strong>WebGL:</strong> GPU acceleration</li>
+                    <li><strong>React:</strong> UI framework</li>
+                    <li><strong>WebXR:</strong> AR integration</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="phase">
+            <h2>Success Metrics & Evaluation</h2>
+            <div class="metrics">
+                <div class="metric">
+                    <h4>Accuracy</h4>
+                    <p>Sub-5-meter precision vs. LOLA</p>
+                </div>
+                <div class="metric">
+                    <h4>Performance</h4>
+                    <p>Under 30 minutes per image</p>
+                </div>
+                <div class="metric">
+                    <h4>Reliability</h4>
+                    <p>99.9% uptime</p>
+                </div>
+                <div class="metric">
+                    <h4>Usability</h4>
+                    <p>Guided tutorials, error feedback</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="phase">
+            <h2>4-Day Implementation Timeline (July 5-9, 2025)</h2>
+            <div class="step">
+                <h3>Day 1 (July 5):</h3>
+                <p>Setup photoclinometry pipeline, integrate APIs, basic data ingestion</p>
+            </div>
+            <div class="step">
+                <h3>Day 2 (July 6):</h3>
+                <p>Enhance preprocessing, train CNN, initial 3D viewer</p>
+            </div>
+            <div class="step">
+                <h3>Day 3 (July 7-8):</h3>
+                <p>Add agentic optimization, validation, advanced features (Lunar Time Machine, AR)</p>
+            </div>
+            <div class="step">
+                <h3>Day 4 (July 9):</h3>
+                <p>Finalize UI, deploy cloud version, prepare demo</p>
+            </div>
+        </div>
+
+        <div class="phase">
+            <h2>Expected Deliverables</h2>
+            <ul>
+                <li>High-resolution DEM from mono imagery</li>
+                <li>Pixel-level disparity maps with sub-pixel refinement</li>
+                <li>Interactive 3D visualization platform</li>
+                <li>AR integration for exploration</li>
+                <li>Validation reports (RMSE, correlation)</li>
+                <li>API documentation</li>
+                <li>Basic educational guide</li>
+            </ul>
+        </div>
+
+        <div class="phase">
+            <h2>Competitive Advantages</h2>
+            <ul>
+                <li><strong>Hybrid AI-Photoclinometry:</strong> Combines traditional and AI methods</li>
+                <li><strong>Real-time Features:</strong> Lunar Time Machine, 3D printing preview</li>
+                <li><strong>ISRO Relevance:</strong> Supports Chandrayaan missions</li>
+                <li><strong>Cost-Effective:</strong> Uses free APIs (NASA PDS, SPICE)</li>
+                <li><strong>Innovative UI:</strong> AR and gamification</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
